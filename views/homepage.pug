@@ -1,0 +1,40 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title= title
+  body
+    h1= title
+    ul
+      each deal in data
+        li
+          strong ID:
+          | #{deal.id}
+          br
+          strong Nombre:
+          | #{deal.properties.dealname}
+          br
+          strong Estado:
+          | #{deal.properties.dealstage}
+          br
+          strong Valor:
+          | #{deal.properties.amount}
+          br
+          form(action="/postdeals" method="POST")
+            input(type="hidden" name="dealId" value=deal.id)
+            div
+              label(for="newVal") Nuevo Nombre del Deal:
+              input(type="text" name="newVal" required)
+            div
+              button(type="submit") Actualizar
+    h2 Crear Nuevo Deal
+    form(action="/postdeals" method="POST")
+      div
+        label(for="dealname") Nombre del Deal:
+        input(type="text" name="newVal" required)
+      div
+        label(for="amount") Valor del Deal:
+        input(type="text" name="amount" required)
+      div
+        button(type="submit") Crear
